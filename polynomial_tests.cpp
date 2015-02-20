@@ -13,6 +13,7 @@ TEST(PolynomialTest, PolynomialToString)
 
 TEST(PolynomialTest, StringToPolynomial)
 {
+    ASSERT_EQ(vector<int>({0}), Polynomial("0").coeffs());
     ASSERT_EQ(vector<int>({1, 0, 1, 1}), Polynomial("D").coeffs());
 }
 

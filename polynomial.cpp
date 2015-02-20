@@ -12,11 +12,11 @@ Polynomial::Polynomial(const std::string& value)
     stream << hex << value;
     size_t x;
     stream >> x;
-    while(x > 0) {
+    do {
         coeffs_.push_back((int) x % BASE);
         x -= x % 2;
         x /= 2;
-    }
+    } while(x > 0);
 }
 
 Polynomial::Polynomial(const vector<int> &coeffs) : coeffs_(coeffs)
