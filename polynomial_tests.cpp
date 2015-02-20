@@ -13,8 +13,17 @@ TEST(PolynomialTest, PolynomialToString)
 
 TEST(PolynomialTest, StringToPolynomial)
 {
+    ASSERT_EQ(vector<int>({0}), Polynomial("").coeffs());
     ASSERT_EQ(vector<int>({0}), Polynomial("0").coeffs());
     ASSERT_EQ(vector<int>({1, 0, 1, 1}), Polynomial("D").coeffs());
+}
+
+TEST(PolynomialTest, Derivative)
+{
+    ASSERT_EQ(Polynomial("0"), Polynomial("0").derivative());
+    ASSERT_EQ(Polynomial("0"), Polynomial("1").derivative());
+    ASSERT_EQ(Polynomial("1"), Polynomial("2").derivative());
+    ASSERT_EQ(Polynomial("14"), Polynomial("29").derivative());
 }
 
 int main(int argc, char **argv)

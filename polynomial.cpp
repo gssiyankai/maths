@@ -10,7 +10,7 @@ Polynomial::Polynomial(const std::string& value)
 {
     stringstream stream;
     stream << hex << value;
-    size_t x;
+    size_t x = 0;
     stream >> x;
     do {
         coeffs_.push_back((int) x % BASE);
@@ -21,6 +21,11 @@ Polynomial::Polynomial(const std::string& value)
 
 Polynomial::Polynomial(const vector<int> &coeffs) : coeffs_(coeffs)
 {
+}
+
+bool Polynomial::operator==(const Polynomial &o) const
+{
+    return coeffs_ == o.coeffs_;
 }
 
 const std::vector<int>& Polynomial::coeffs() const
@@ -40,4 +45,16 @@ string Polynomial::str() const
     stringstream stream;
     stream << hex << result;
     return stream.str();
+}
+
+Polynomial Polynomial::derivative() const
+{
+    if(coeffs_.size() > 1)
+    {
+        return Polynomial(vector<int>(coeffs_.begin()+1, coeffs_.end()));
+    }
+    else
+    {
+        return Polynomial(vector<int>({ 0 }));
+    }
 }
