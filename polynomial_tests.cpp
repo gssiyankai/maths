@@ -70,6 +70,21 @@ TEST(PolynomialTest, Gcd)
     ASSERT_EQ(Polynomial("B"), Polynomial("53").gcd(Polynomial("16")));
 }
 
+TEST(PolynomialTest, Factorize)
+{
+    {
+        const vector<Polynomial>& result = Polynomial("1").factorize();
+        ASSERT_EQ(1, result.size());
+        ASSERT_EQ(Polynomial("1"), result[0]);
+    }
+    {
+        const vector<Polynomial>& result = Polynomial("16").factorize();
+        ASSERT_EQ(2, result.size());
+        ASSERT_EQ(Polynomial("2"), result[0]);
+        ASSERT_EQ(Polynomial("B"), result[1]);
+    }
+}
+
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);

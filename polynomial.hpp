@@ -18,6 +18,7 @@ public:
     Polynomial multiply(const Polynomial& m) const;
     std::vector<Polynomial> divide(const Polynomial& divisor) const;
     Polynomial gcd(const Polynomial& p) const;
+    std::vector<Polynomial> factorize() const;
 
 private:
     unsigned int multiply(unsigned int n, unsigned int m) const;

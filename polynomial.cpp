@@ -119,3 +119,10 @@ Polynomial Polynomial::gcd(const Polynomial &p) const
 
     return Polynomial(a);
 }
+
+vector<Polynomial> Polynomial::factorize() const
+{
+    vector<Polynomial> result;
+    result.push_back(*this);
+    return result;
+}
