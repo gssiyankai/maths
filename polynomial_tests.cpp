@@ -27,25 +27,25 @@ TEST(PolynomialTest, Derivative)
 
 TEST(PolynomialTest, Multiply)
 {
-    ASSERT_EQ(Polynomial("0"), Polynomial("1").multiply("0"));
-    ASSERT_EQ(Polynomial("1"), Polynomial("1").multiply("1"));
-    ASSERT_EQ(Polynomial("9"), Polynomial("3").multiply("7"));
+    ASSERT_EQ(Polynomial("0"), Polynomial("1").multiply(Polynomial("0")));
+    ASSERT_EQ(Polynomial("1"), Polynomial("1").multiply(Polynomial("1")));
+    ASSERT_EQ(Polynomial("9"), Polynomial("3").multiply(Polynomial("7")));
 }
 
 TEST(PolynomialTest, Divide)
 {
     {
-        vector<Polynomial> result = Polynomial("1").divide(Polynomial("1"));
+        const vector<Polynomial>& result = Polynomial("1").divide(Polynomial("1"));
         ASSERT_EQ(Polynomial("1"), result[0]);
         ASSERT_EQ(Polynomial("0"), result[1]);
     }
     {
-        vector<Polynomial> result = Polynomial("95").divide(Polynomial("3"));
+        const vector<Polynomial>& result = Polynomial("95").divide(Polynomial("3"));
         ASSERT_EQ(Polynomial("73"), result[0]);
         ASSERT_EQ(Polynomial("0"), result[1]);
     }
     {
-        vector<Polynomial> result = Polynomial("D").divide(Polynomial("3"));
+        const vector<Polynomial>& result = Polynomial("D").divide(Polynomial("3"));
         ASSERT_EQ(Polynomial("4"), result[0]);
         ASSERT_EQ(Polynomial("1"), result[1]);
     }

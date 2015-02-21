@@ -37,12 +37,54 @@ Polynomial Polynomial::derivative() const
     return Polynomial(coeffs_ >> 1);
 }
 
-Polynomial Polynomial::multiply() const
+Polynomial Polynomial::multiply(const Polynomial& m) const
 {
-    return Polynomial("0");
+    return Polynomial(multiply(coeffs_, m.coeffs_));
+}
+
+unsigned int Polynomial::multiply(unsigned int n, unsigned int m) const
+{
+    unsigned int r = 0;
+    unsigned int i = 0;
+    while(m > 0)
+    {
+        if((m & 1) == 1)
+        {
+            r ^= (n << i);
+        }
+        m = m >> 1;
+        ++i;
+    }
+    return r;
 }
 
 vector<Polynomial> Polynomial::divide(const Polynomial &divisor) const
 {
-    return vector<Polynomial>();
+    vector<Polynomial> result;
+
+    unsigned int d = divisor.coeffs_;
+    unsigned int q = 0;
+    unsigned int r = coeffs_;
+
+    while(r != 0 && r >= d)
+    {
+        unsigned int t = (((unsigned int)1) << (lead(r) - lead(d)));
+        q ^= t;
+        r ^= multiply(t, d);
+    }
+
+    result.push_back(Polynomial(q));
+    result.push_back(Polynomial(r));
+    return result;
+}
+
+unsigned int Polynomial::lead(unsigned int n) const
+{
+    unsigned int i = 0;
+    while(n > 0)
+    {
+        n = n >> 1;
+        ++i;
+    }
+    return i;
 }

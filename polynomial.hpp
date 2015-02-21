@@ -15,10 +15,13 @@ public:
     unsigned int coeffs() const;
     std::string str() const;
     Polynomial derivative() const;
-    Polynomial multiply() const;
+    Polynomial multiply(const Polynomial& m) const;
     std::vector<Polynomial> divide(const Polynomial& divisor) const;
 
 private:
+    unsigned int multiply(unsigned int n, unsigned int m) const;
+    unsigned int lead(unsigned int n) const;
+
     unsigned int coeffs_;
 
 };
