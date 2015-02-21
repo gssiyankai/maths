@@ -30,6 +30,8 @@ TEST(PolynomialTest, Multiply)
     ASSERT_EQ(Polynomial("0"), Polynomial("1").multiply(Polynomial("0")));
     ASSERT_EQ(Polynomial("1"), Polynomial("1").multiply(Polynomial("1")));
     ASSERT_EQ(Polynomial("9"), Polynomial("3").multiply(Polynomial("7")));
+    ASSERT_EQ(Polynomial("53"), Polynomial("B").multiply(Polynomial("9")));
+    ASSERT_EQ(Polynomial("16"), Polynomial("B").multiply(Polynomial("2")));
 }
 
 TEST(PolynomialTest, Divide)
@@ -49,12 +51,23 @@ TEST(PolynomialTest, Divide)
         ASSERT_EQ(Polynomial("4"), result[0]);
         ASSERT_EQ(Polynomial("1"), result[1]);
     }
+    {
+        const vector<Polynomial>& result = Polynomial("53").divide(Polynomial("B"));
+        ASSERT_EQ(Polynomial("9"), result[0]);
+        ASSERT_EQ(Polynomial("0"), result[1]);
+    }
+    {
+        const vector<Polynomial>& result = Polynomial("16").divide(Polynomial("B"));
+        ASSERT_EQ(Polynomial("2"), result[0]);
+        ASSERT_EQ(Polynomial("0"), result[1]);
+    }
 }
 
 TEST(PolynomialTest, Gcd)
 {
     ASSERT_EQ(Polynomial("1"), Polynomial("1").gcd(Polynomial("1")));
     ASSERT_EQ(Polynomial("73"), Polynomial("95").gcd(Polynomial("73")));
+    ASSERT_EQ(Polynomial("B"), Polynomial("53").gcd(Polynomial("16")));
 }
 
 int main(int argc, char **argv)

@@ -89,7 +89,33 @@ unsigned int Polynomial::lead(unsigned int n) const
     return i;
 }
 
+unsigned int Polynomial::remainder(unsigned int dividend, unsigned int divisor) const
+{
+    unsigned int d = divisor;
+    unsigned int r = dividend;
+
+    while(r != 0 && r >= d)
+    {
+        unsigned int t = (((unsigned int)1) << (lead(r) - lead(d)));
+        r ^= multiply(t, d);
+    }
+
+    return r;
+}
+
 Polynomial Polynomial::gcd(const Polynomial &p) const
 {
-    return p;
+    unsigned int a = coeffs_;
+    unsigned int b = p.coeffs_;
+
+    unsigned int r = 0;
+
+    do
+    {
+        r = remainder(a, b);
+        a = b;
+        b = r;
+    } while(b != 0);
+
+    return Polynomial(a);
 }

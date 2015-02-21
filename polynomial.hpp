@@ -22,6 +22,7 @@ public:
 private:
     unsigned int multiply(unsigned int n, unsigned int m) const;
     unsigned int lead(unsigned int n) const;
+    unsigned int remainder(unsigned int dividend, unsigned int divisor) const;
 
     unsigned int coeffs_;
 
