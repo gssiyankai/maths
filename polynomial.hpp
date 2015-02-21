@@ -15,6 +15,8 @@ public:
     unsigned int coeffs() const;
     std::string str() const;
     Polynomial derivative() const;
+    Polynomial multiply() const;
+    std::vector<Polynomial> divide(const Polynomial& divisor) const;
 
 private:
     unsigned int coeffs_;

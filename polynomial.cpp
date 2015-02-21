@@ -4,8 +4,7 @@
 
 using namespace std;
 
-
-Polynomial::Polynomial(const std::string& value) : coeffs_(0)
+Polynomial::Polynomial(const std::string& value)
 {
     stringstream stream;
     stream << hex << value;
@@ -36,4 +35,14 @@ string Polynomial::str() const
 Polynomial Polynomial::derivative() const
 {
     return Polynomial(coeffs_ >> 1);
+}
+
+Polynomial Polynomial::multiply() const
+{
+    return Polynomial("0");
+}
+
+vector<Polynomial> Polynomial::divide(const Polynomial &divisor) const
+{
+    return vector<Polynomial>();
 }
