@@ -88,3 +88,8 @@ unsigned int Polynomial::lead(unsigned int n) const
     }
     return i;
 }
+
+Polynomial Polynomial::gcd(const Polynomial &p) const
+{
+    return p;
+}

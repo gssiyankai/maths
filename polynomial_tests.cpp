@@ -51,6 +51,12 @@ TEST(PolynomialTest, Divide)
     }
 }
 
+TEST(PolynomialTest, Gcd)
+{
+    ASSERT_EQ(Polynomial("1"), Polynomial("1").gcd(Polynomial("1")));
+    ASSERT_EQ(Polynomial("73"), Polynomial("95").gcd(Polynomial("73")));
+}
+
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
