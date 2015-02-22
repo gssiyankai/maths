@@ -19,7 +19,7 @@ public:
     std::vector<Polynomial> divide(const Polynomial& divisor) const;
     Polynomial gcd(const Polynomial& p) const;
     std::vector<Polynomial> factorize() const;
-    std::vector< std::pair<Polynomial, Polynomial> > pair_factorize() const;
+    std::vector< std::pair<Polynomial, Polynomial> > pair_factorize(unsigned int d=0xFFFFFFFF) const;
 
 private:
     static unsigned int derivative(unsigned int n);

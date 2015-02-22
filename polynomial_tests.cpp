@@ -101,3 +101,10 @@ TEST(PolynomialTest, PairFactorize)
     ASSERT_EQ(make_pair(Polynomial("7"), Polynomial("1D")), pair_factors[1]);
     ASSERT_EQ(make_pair(Polynomial("B"), Polynomial("9")), pair_factors[2]);
 }
+
+TEST(PolynomialTest, PairFactorizeWithMaxDegree)
+{
+    const vector< pair<Polynomial, Polynomial> >& pair_factors = Polynomial("53").pair_factorize(3);
+    ASSERT_EQ(1, pair_factors.size());
+    ASSERT_EQ(make_pair(Polynomial("B"), Polynomial("9")), pair_factors[0]);
+}

@@ -86,7 +86,7 @@ vector<Polynomial> Polynomial::divide(const Polynomial &divisor) const
 unsigned int Polynomial::degree(unsigned int n)
 {
     unsigned int i = 0;
-    while(n > 0)
+    while(n > 1)
     {
         n = n >> 1;
         ++i;
@@ -151,7 +151,7 @@ vector<Polynomial> Polynomial::factorize() const
     unsigned int fp = f;
     while(degree(fp) > 2*i)
     {
-        unsigned int g = gcd(fp, (1 << pow2(i)) | 2);
+        unsigned int g = gcd(fp, (((unsigned int)1) << pow2(i)) | 2);
         if(g != 1)
         {
             fs.push_back(Polynomial(g));
@@ -180,7 +180,7 @@ unsigned int Polynomial::pow2(unsigned int n)
     return p;
 }
 
-vector< pair<Polynomial, Polynomial> > Polynomial::pair_factorize() const
+vector< pair<Polynomial, Polynomial> > Polynomial::pair_factorize(unsigned int d) const
 {
     vector< pair<Polynomial, Polynomial> > result;
 
@@ -188,10 +188,13 @@ vector< pair<Polynomial, Polynomial> > Polynomial::pair_factorize() const
     const vector< pair< vector<Polynomial>, vector<Polynomial> > > pair_factors =  Utils::split(factors);
     for(int i = 0; i < pair_factors.size(); ++i)
     {
-        result.push_back(
-                make_pair(
-                        multiply(pair_factors[i].first),
-                        multiply(pair_factors[i].second)));
+        const Polynomial& factor1 = multiply(pair_factors[i].first);
+        const Polynomial& factor2 = multiply(pair_factors[i].second);
+
+        if(degree(factor1.coeffs_) <= d && degree(factor2.coeffs_) <= d)
+        {
+            result.push_back(make_pair(factor1, factor2));
+        }
     }
 
     return result;
