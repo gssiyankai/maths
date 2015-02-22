@@ -92,3 +92,12 @@ TEST(PolynomialTest, Factorize)
         ASSERT_EQ(Polynomial("B"), result[2]);
     }
 }
+
+TEST(PolynomialTest, PairFactorize)
+{
+    const vector< pair<Polynomial, Polynomial> >& pair_factors = Polynomial("53").pair_factorize();
+    ASSERT_EQ(3, pair_factors.size());
+    ASSERT_EQ(make_pair(Polynomial("3"), Polynomial("31")), pair_factors[0]);
+    ASSERT_EQ(make_pair(Polynomial("7"), Polynomial("1D")), pair_factors[1]);
+    ASSERT_EQ(make_pair(Polynomial("9"), Polynomial("B")), pair_factors[2]);
+}

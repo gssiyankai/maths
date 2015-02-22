@@ -179,3 +179,9 @@ unsigned int Polynomial::pow2(unsigned int n)
     }
     return p;
 }
+
+vector< pair<Polynomial, Polynomial> > Polynomial::pair_factorize() const
+{
+    vector< pair<Polynomial, Polynomial> > pairs;
+    return pairs;
+}
