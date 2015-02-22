@@ -23,10 +23,11 @@ public:
 private:
     static unsigned int derivative(unsigned int n);
     static unsigned int multiply(unsigned int n, unsigned int m);
-    static unsigned int lead(unsigned int n);
+    static unsigned int degree(unsigned int n);
     static unsigned int quotient(unsigned int dividend, unsigned int divisor);
     static unsigned int remainder(unsigned int dividend, unsigned int divisor);
     static unsigned int gcd(unsigned int a, unsigned int b);
+    static unsigned int pow2(unsigned int n);
 
     unsigned int coeffs_;
 

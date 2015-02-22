@@ -73,7 +73,7 @@ vector<Polynomial> Polynomial::divide(const Polynomial &divisor) const
 
     while(r != 0 && r >= d)
     {
-        unsigned int t = (((unsigned int)1) << (lead(r) - lead(d)));
+        unsigned int t = (((unsigned int)1) << (degree(r) - degree(d)));
         q ^= t;
         r ^= multiply(t, d);
     }
@@ -83,7 +83,7 @@ vector<Polynomial> Polynomial::divide(const Polynomial &divisor) const
     return result;
 }
 
-unsigned int Polynomial::lead(unsigned int n)
+unsigned int Polynomial::degree(unsigned int n)
 {
     unsigned int i = 0;
     while(n > 0)
@@ -102,7 +102,7 @@ unsigned int Polynomial::quotient(unsigned int dividend, unsigned int divisor)
 
     while(r != 0 && r >= d)
     {
-        unsigned int t = (((unsigned int)1) << (lead(r) - lead(d)));
+        unsigned int t = (((unsigned int)1) << (degree(r) - degree(d)));
         q ^= t;
         r ^= multiply(t, d);
     }
@@ -117,7 +117,7 @@ unsigned int Polynomial::remainder(unsigned int dividend, unsigned int divisor)
 
     while(r != 0 && r >= d)
     {
-        unsigned int t = (((unsigned int)1) << (lead(r) - lead(d)));
+        unsigned int t = (((unsigned int)1) << (degree(r) - degree(d)));
         r ^= multiply(t, d);
     }
 
@@ -145,72 +145,37 @@ unsigned int Polynomial::gcd(unsigned int a, unsigned int b)
 
 vector<Polynomial> Polynomial::factorize() const
 {
-    if(coeffs_==1)
-    {
-        vector<Polynomial> result;
-        result.push_back(Polynomial(1));
-        return result;
-    }
-
+    vector<Polynomial> fs;
     unsigned int i = 1;
-    unsigned int r = 1;
-    unsigned int f = coeffs_;
-    unsigned int g = derivative(f);
-
-    if(g != 0)
+    unsigned  int f = coeffs_;
+    unsigned int fp = f;
+    while(degree(fp) > 2*i)
     {
-        unsigned int c = gcd(f, g);
-        unsigned int w = quotient(f, c);
-        while(w != 1)
+        unsigned int g = gcd(fp, (1 << pow2(i)) | 2);
+        if(g != 1)
         {
-            unsigned int y = gcd(w, c);
-                unsigned int z = quotient(w, y);
-            unsigned int zi = 1;
-            for(int j = 0; j < i; ++j)
-            {
-                zi = multiply(zi, z);
-            }
-            r = multiply(r, zi);
-            ++i;
-            w = y;
-            c = quotient(c, y);
+            fs.push_back(Polynomial(g));
+            fp = quotient(fp, g);
         }
-        if(c != 1)
-        {
-            if((c & 1) == 1)
-            {
-                c = c >> 2;
-                c |= 1;
-            }
-            else
-            {
-                c = c >> 2;
-            }
-
-            vector<Polynomial> result;
-            result.push_back(Polynomial(r));
-            const vector<Polynomial>& sub_result = Polynomial(c).factorize(); //TODO
-            result.insert(result.end(), sub_result.begin(), sub_result.end());
-            return result;
-        }
-        else
-        {
-            vector<Polynomial> result;
-            result.push_back(Polynomial(multiply(r, r)));
-            return result;
-        }
+        ++i;
     }
-    else
+    if(fp != 1)
     {
-        if((f & 1) == 1)
-        {
-            f = f >> 2;
-            f |= 1;
-        }
-        else
-        {
-            f = f >> 2;
-        }
-        return Polynomial(f).factorize(); //TODO
+        fs.push_back(fp);
     }
+    if(fs.empty())
+    {
+        fs.push_back(f);
+    }
+    return fs;
+}
+
+unsigned int Polynomial::pow2(unsigned int n)
+{
+    unsigned int p = 2;
+    while(--n > 0)
+    {
+        p = p << 1;
+    }
+    return p;
 }

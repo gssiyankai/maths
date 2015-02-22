@@ -84,6 +84,13 @@ TEST(PolynomialTest, Factorize)
         ASSERT_EQ(Polynomial("2"), result[0]);
         ASSERT_EQ(Polynomial("B"), result[1]);
     }
+    {
+        const vector<Polynomial>& result = Polynomial("53").factorize();
+        ASSERT_EQ(3, result.size());
+        ASSERT_EQ(Polynomial("3"), result[0]);
+        ASSERT_EQ(Polynomial("7"), result[1]);
+        ASSERT_EQ(Polynomial("B"), result[2]);
+    }
 }
 
 int main(int argc, char **argv)
