@@ -29,6 +29,7 @@ private:
     static unsigned int remainder(unsigned int dividend, unsigned int divisor);
     static unsigned int gcd(unsigned int a, unsigned int b);
     static unsigned int pow2(unsigned int n);
+    static Polynomial multiply(const std::vector<Polynomial>& ps);
 
     unsigned int coeffs_;
 

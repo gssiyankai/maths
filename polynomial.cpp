@@ -1,5 +1,5 @@
 #include "polynomial.hpp"
-#include <iomanip>
+#include "utils.hpp"
 #include <sstream>
 
 using namespace std;
@@ -182,6 +182,27 @@ unsigned int Polynomial::pow2(unsigned int n)
 
 vector< pair<Polynomial, Polynomial> > Polynomial::pair_factorize() const
 {
-    vector< pair<Polynomial, Polynomial> > pairs;
-    return pairs;
+    vector< pair<Polynomial, Polynomial> > result;
+
+    const vector<Polynomial>& factors = factorize();
+    const vector< pair< vector<Polynomial>, vector<Polynomial> > > pair_factors =  Utils::split(factors);
+    for(int i = 0; i < pair_factors.size(); ++i)
+    {
+        result.push_back(
+                make_pair(
+                        multiply(pair_factors[i].first),
+                        multiply(pair_factors[i].second)));
+    }
+
+    return result;
+}
+
+Polynomial Polynomial::multiply(const std::vector<Polynomial> &ps)
+{
+    Polynomial r = ps[0];
+    for(int i = 1; i < ps.size(); ++i)
+    {
+        r = r.multiply(ps[i]);
+    }
+    return r;
 }

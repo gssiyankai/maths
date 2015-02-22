@@ -99,5 +99,5 @@ TEST(PolynomialTest, PairFactorize)
     ASSERT_EQ(3, pair_factors.size());
     ASSERT_EQ(make_pair(Polynomial("3"), Polynomial("31")), pair_factors[0]);
     ASSERT_EQ(make_pair(Polynomial("7"), Polynomial("1D")), pair_factors[1]);
-    ASSERT_EQ(make_pair(Polynomial("9"), Polynomial("B")), pair_factors[2]);
+    ASSERT_EQ(make_pair(Polynomial("B"), Polynomial("9")), pair_factors[2]);
 }
