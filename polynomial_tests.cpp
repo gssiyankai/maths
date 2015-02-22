@@ -23,6 +23,7 @@ TEST(PolynomialTest, Derivative)
     ASSERT_EQ(Polynomial("0"), Polynomial("1").derivative());
     ASSERT_EQ(Polynomial("1"), Polynomial("2").derivative());
     ASSERT_EQ(Polynomial("14"), Polynomial("29").derivative());
+    ASSERT_EQ(Polynomial("0"), Polynomial("14").derivative());
 }
 
 TEST(PolynomialTest, Multiply)
