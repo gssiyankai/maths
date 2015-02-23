@@ -263,20 +263,20 @@ vector< vector<int> > Polynomial::berlekamp_qmatrix(unsigned int f)
     qm.push_back(q);
     qm.insert(qm.end(), n-1, vector<int>());
 
-    for(int i = 0; i < (n-1)*2 + 1; ++i)
+    for(int i = 0; i < (n-1)*2; ++i)
     {
         int c = q[q.size()-1];
         vector<int> qq;
         qq.push_back(c * (f & 1));
 
-        for(int j = 0; j < n; ++j)
+        for(int j = 1; j < n; ++j)
         {
             qq.push_back(q[j] ^ c * ((f >> j) & 1));
         }
 
-        if(i%2 == 0)
+        if(i%2 == 1)
         {
-            qm[i/2] = vector<int>(qq);
+            qm[(i+1)/2] = vector<int>(qq);
         }
 
         q = qq;

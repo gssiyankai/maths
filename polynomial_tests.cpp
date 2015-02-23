@@ -113,7 +113,7 @@ TEST(PolynomialTest, BerlekampQMatrix)
 {
     {
         const vector< vector<int> >& result = Polynomial::berlekamp_qmatrix(Polynomial("73AF").coeffs());
-        const vector< vector<int> > expected = { { 1,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 
+        const vector< vector<int> > expected = { { 1,0,0,0,0,0,0,0,0,0,0,0,0,0 },
                                                  { 0,0,1,0,0,0,0,0,0,0,0,0,0,0 },
                                                  { 0,0,0,0,1,0,0,0,0,0,0,0,0,0 },
                                                  { 0,0,0,0,0,0,1,0,0,0,0,0,0,0 },
@@ -127,16 +127,16 @@ TEST(PolynomialTest, BerlekampQMatrix)
                                                  { 1,0,0,1,1,0,0,0,0,1,1,1,1,1 },
                                                  { 0,1,0,1,1,1,0,0,1,1,1,1,1,0 },
                                                  { 1,1,1,0,0,0,1,0,1,1,1,1,0,0 } };
-        ASSERT_EQ(expected, result);        
+        ASSERT_EQ(expected, result);
     }
 }
 
-TEST(PolynomialTest, FactorizeBerlekamp)
-{
-    {
-        const vector<Polynomial>& result = Polynomial("73AF").factorize_berlekamp();
-        ASSERT_EQ(2, result.size());
-        ASSERT_EQ(Polynomial("83"), result[0]);
-        ASSERT_EQ(Polynomial("e5"), result[1]);
-    }
-}
+//TEST(PolynomialTest, FactorizeBerlekamp)
+//{
+//    {
+//        const vector<Polynomial>& result = Polynomial("73AF").factorize_berlekamp();
+//        ASSERT_EQ(2, result.size());
+//        ASSERT_EQ(Polynomial("83"), result[0]);
+//        ASSERT_EQ(Polynomial("e5"), result[1]);
+//    }
+//}
