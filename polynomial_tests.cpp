@@ -150,4 +150,10 @@ TEST(PolynomialTest, FactorizeBerlekamp)
         ASSERT_EQ(Polynomial("83"), result[0]);
         ASSERT_EQ(Polynomial("e5"), result[1]);
     }
+    {
+        const vector<Polynomial>& result = Polynomial("738377c1").factorize_berlekamp();
+        ASSERT_EQ(2, result.size());
+        ASSERT_EQ(Polynomial("b0c5"), result[0]);
+        ASSERT_EQ(Polynomial("cd55"), result[1]);
+    }
 }
