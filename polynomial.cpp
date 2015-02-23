@@ -222,18 +222,17 @@ vector<Polynomial> Polynomial::factorize_berlekamp() const
         {
             v[i].pop_back();
         }
-        reverse(v[i].begin(), v[i].end());
     }
 
-    vector<Polynomial> factors;
-    factors.push_back(Polynomial(coeffs_));
+    vector<unsigned int> factors;
+    factors.push_back(coeffs_);
 
-    for(int k = 0; k < v.size(); ++k)
+    for(int k = 1; k < v.size(); ++k)
     {
-        vector<Polynomial> fs(factors);
+        vector<unsigned int> fs(factors);
         for(auto i = fs.begin(); i != fs.end(); ++i)
         {
-            unsigned int f = i->coeffs_;
+            unsigned int f = *i;
             int s = 0;
 
             while(s < 2)
@@ -241,15 +240,68 @@ vector<Polynomial> Polynomial::factorize_berlekamp() const
                 unsigned int sv = 0;
                 for(int j = 0; j < v[k].size(); ++j)
                 {
-
+                    sv |= (v[k][j] << j);
                 }
-                unsigned int g =
+                unsigned int g = sub_ground(sv, s);
+                unsigned int h = gcd(f, g);
+
+                if(h != 1 && h != f)
+                {
+                    for(auto j = factors.begin(); j != factors.end(); ++j)
+                    {
+                        if(*j ==f)
+                        {
+                            factors.erase(j);
+                            break;
+                        }
+                    }
+
+                    f = quotient(f, h);
+                    factors.push_back(f);
+                    factors.push_back(h);
+                }
+
+                if(factors.size() == v.size())
+                {
+                    vector<Polynomial> result;
+                    for(int i = 0; i < factors.size(); ++i)
+                    {
+                        result.push_back(Polynomial(factors[i]));
+                    }
+                    return result;
+                }
                 ++s;
             }
         }
     }
 
-    return factors;
+    vector<Polynomial> result;
+    for(int i = 0; i < factors.size(); ++i)
+    {
+        result.push_back(Polynomial(factors[i]));
+    }
+    return result;
+}
+
+unsigned int Polynomial::sub_ground(unsigned int f, unsigned int a)
+{
+    if(f != 0)
+    {
+        a = (f & 1) ^ a;
+        if((f & ~1) != 0)
+        {
+            return (f & ~1) + a;
+        }
+    }
+
+    if(a==0)
+    {
+        return 0;
+    }
+    else
+    {
+        return a;
+    }
 }
 
 vector< vector<int> > Polynomial::berlekamp_qmatrix(unsigned int f)

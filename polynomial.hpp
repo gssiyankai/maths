@@ -23,6 +23,7 @@ public:
     std::vector<Polynomial> factorize_berlekamp() const;
     static std::vector< std::vector<int> > berlekamp_qmatrix(unsigned int f);
     static std::vector< std::vector<int> > berlekamp_qbasis(const std::vector< std::vector<int> >& qmatrix);
+    static unsigned int sub_ground(unsigned int f, unsigned int a);
 
 private:
     static unsigned int derivative(unsigned int n);

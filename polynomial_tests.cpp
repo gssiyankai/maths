@@ -142,12 +142,12 @@ TEST(PolynomialTest, BerlekampQBasis)
     ASSERT_EQ(expected, result);
 }
 
-//TEST(PolynomialTest, FactorizeBerlekamp)
-//{
-//    {
-//        const vector<Polynomial>& result = Polynomial("73AF").factorize_berlekamp();
-//        ASSERT_EQ(2, result.size());
-//        ASSERT_EQ(Polynomial("83"), result[0]);
-//        ASSERT_EQ(Polynomial("e5"), result[1]);
-//    }
-//}
+TEST(PolynomialTest, FactorizeBerlekamp)
+{
+    {
+        const vector<Polynomial>& result = Polynomial("73AF").factorize_berlekamp();
+        ASSERT_EQ(2, result.size());
+        ASSERT_EQ(Polynomial("83"), result[0]);
+        ASSERT_EQ(Polynomial("e5"), result[1]);
+    }
+}
