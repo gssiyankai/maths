@@ -271,7 +271,7 @@ vector< vector<int> > Polynomial::berlekamp_qmatrix(unsigned int f)
 
         for(int j = 1; j < n; ++j)
         {
-            qq.push_back(q[j] ^ c * ((f >> j) & 1));
+            qq.push_back(q[j-1] ^ c * ((f >> j) & 1));
         }
 
         if(i%2 == 1)
