@@ -108,3 +108,13 @@ TEST(PolynomialTest, PairFactorizeWithMaxDegree)
     ASSERT_EQ(1, pair_factors.size());
     ASSERT_EQ(make_pair(Polynomial("B"), Polynomial("9")), pair_factors[0]);
 }
+
+TEST(PolynomialTest, FactorizeBerlekamp)
+{
+    {
+        const vector<Polynomial>& result = Polynomial("73AF").factorize_berlekamp();
+        ASSERT_EQ(2, result.size());
+        ASSERT_EQ(Polynomial("83"), result[0]);
+        ASSERT_EQ(Polynomial("e5"), result[1]);
+    }
+}

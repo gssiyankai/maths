@@ -1,6 +1,7 @@
 #include "polynomial.hpp"
 #include "utils.hpp"
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -200,7 +201,7 @@ vector< pair<Polynomial, Polynomial> > Polynomial::pair_factorize(unsigned int d
     return result;
 }
 
-Polynomial Polynomial::multiply(const std::vector<Polynomial> &ps)
+Polynomial Polynomial::multiply(const vector<Polynomial> &ps)
 {
     Polynomial r = ps[0];
     for(int i = 1; i < ps.size(); ++i)
@@ -208,4 +209,147 @@ Polynomial Polynomial::multiply(const std::vector<Polynomial> &ps)
         r = r.multiply(ps[i]);
     }
     return r;
+}
+
+vector<Polynomial> Polynomial::factorize_berlekamp() const
+{
+    vector< vector<int> > q = berlekamp_qmatrix(coeffs_);
+    vector< vector<int> > v = berlekamp_qbasis(q);
+
+    for(int i = 0; i < v.size(); ++i)
+    {
+        while(v[i].back() == 0)
+        {
+            v[i].pop_back();
+        }
+        reverse(v[i].begin(), v[i].end());
+    }
+
+    vector<Polynomial> factors;
+    factors.push_back(Polynomial(coeffs_));
+
+    for(int k = 0; k < v.size(); ++k)
+    {
+        vector<Polynomial> fs(factors);
+        for(auto i = fs.begin(); i != fs.end(); ++i)
+        {
+            unsigned int f = i->coeffs_;
+            int s = 0;
+
+            while(s < 2)
+            {
+                unsigned int sv = 0;
+                for(int j = 0; j < v[k].size(); ++j)
+                {
+
+                }
+                unsigned int g =
+                ++s;
+            }
+        }
+    }
+
+    return factors;
+}
+
+vector< vector<int> > Polynomial::berlekamp_qmatrix(unsigned int f)
+{
+    unsigned int n = degree(f);
+    vector<int> q;
+    q.push_back(1);
+    q.insert(q.end(), n-1, 0);
+
+    vector< vector<int> > qm;
+    qm.push_back(q);
+    qm.insert(qm.end(), n-1, vector<int>());
+
+    for(int i = 0; i < (n-1)*2 + 1; ++i)
+    {
+        int c = q[q.size()-1];
+        vector<int> qq;
+        qq.push_back(c * (f & 1));
+
+        for(int j = 0; j < n; ++j)
+        {
+            qq.push_back(q[j] ^ c * ((f >> j) & 1));
+        }
+
+        if(i%2 == 0)
+        {
+            qm[i/2] = vector<int>(qq);
+        }
+
+        q = qq;
+    }
+
+    return qm;
+}
+
+vector< vector<int> > Polynomial::berlekamp_qbasis(const vector< vector<int> > &qmatrix)
+{
+    vector< vector<int> > q(qmatrix);
+    unsigned int n = qmatrix.size();
+
+    for(int k = 0; k < n; ++k)
+    {
+        q[k][k] = q[k][k] ^ 1;
+    }
+
+    for(int k = 0; k < n; ++k)
+    {
+        int i = k;
+
+        for(; i < n; ++i)
+        {
+            if(q[k][i] == 1)
+            {
+                break;
+            }
+        }
+
+        for(int j = 0; j < n; ++j)
+        {
+            int t = q[j][k];
+            q[j][k] = q[j][i];
+            q[j][i] = t;
+        }
+
+        for(i = 0; i < n; ++i)
+        {
+            if(i != k)
+            {
+                int sq = q[k][i];
+
+                for(int j = 0; j < n; ++j)
+                {
+                    q[j][i] = q[j][i] ^ (q[j][k] * sq);
+                }
+            }
+        }
+    }
+
+    for(int i = 0; i < n; ++i)
+    {
+        for(int j = 0; j < n; ++j)
+        {
+            if(i == j)
+            {
+                q[i][j] = 1 ^ q[i][j];
+            }
+        }
+    }
+
+    vector< vector<int> > basic;
+    for(int i = 0; i < q.size(); ++i)
+    {
+        for(int j = 0; j < q[i].size(); ++j)
+        {
+            if(q[i][j]==1)
+            {
+                basic.push_back(q[i]);
+                break;
+            }
+        }
+    }
+    return basic;
 }
