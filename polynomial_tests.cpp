@@ -109,6 +109,28 @@ TEST(PolynomialTest, PairFactorizeWithMaxDegree)
     ASSERT_EQ(make_pair(Polynomial("B"), Polynomial("9")), pair_factors[0]);
 }
 
+TEST(PolynomialTest, BerlekampQMatrix)
+{
+    {
+        const vector< vector<int> >& result = Polynomial::berlekamp_qmatrix(Polynomial("73AF").coeffs());
+        const vector< vector<int> > expected = { { 1,0,0,0,0,0,0,0,0,0,0,0,0,0 }, 
+                                                 { 0,0,1,0,0,0,0,0,0,0,0,0,0,0 },
+                                                 { 0,0,0,0,1,0,0,0,0,0,0,0,0,0 },
+                                                 { 0,0,0,0,0,0,1,0,0,0,0,0,0,0 },
+                                                 { 0,0,0,0,0,0,0,0,1,0,0,0,0,0 },
+                                                 { 0,0,0,0,0,0,0,0,0,0,1,0,0,0 },
+                                                 { 0,0,0,0,0,0,0,0,0,0,0,0,1,0 },
+                                                 { 1,1,1,1,0,1,0,1,1,1,0,0,1,1 },
+                                                 { 0,1,0,0,0,1,1,1,1,0,0,1,0,1 },
+                                                 { 1,0,0,1,1,1,1,0,1,1,0,0,1,1 },
+                                                 { 0,1,0,1,1,1,0,1,0,1,0,1,0,1 },
+                                                 { 1,0,0,1,1,0,0,0,0,1,1,1,1,1 },
+                                                 { 0,1,0,1,1,1,0,0,1,1,1,1,1,0 },
+                                                 { 1,1,1,0,0,0,1,0,1,1,1,1,0,0 } };
+        ASSERT_EQ(expected, result);        
+    }
+}
+
 TEST(PolynomialTest, FactorizeBerlekamp)
 {
     {
