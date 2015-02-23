@@ -307,6 +307,11 @@ vector< vector<int> > Polynomial::berlekamp_qbasis(const vector< vector<int> > &
             }
         }
 
+        if(i == n)
+        {
+            continue;
+        }
+
         for(int j = 0; j < n; ++j)
         {
             int t = q[j][k];
