@@ -169,4 +169,10 @@ TEST(PolynomialTest, FactorizeBerlekamp)
         ASSERT_EQ(Polynomial("B"), result[0]);
         ASSERT_EQ(Polynomial("2"), result[1]);
     }
+    {
+        const vector<Polynomial>& result = Polynomial("6677e20146508fb7").factorize_berlekamp();
+        ASSERT_EQ(2, result.size());
+        ASSERT_EQ(Polynomial("b0c152f9"), result[0]);
+        ASSERT_EQ(Polynomial("ebf2831f"), result[1]);
+    }
 }
