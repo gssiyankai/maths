@@ -33,44 +33,6 @@ TEST(PolynomialTest, Gcd)
     ASSERT_EQ(Polynomial("B"), Polynomial("53").gcd(Polynomial("16")));
 }
 
-TEST(PolynomialTest, Factorize)
-{
-    {
-        const vector<Polynomial>& result = Polynomial("1").factorize();
-        ASSERT_EQ(1, result.size());
-        ASSERT_EQ(Polynomial("1"), result[0]);
-    }
-    {
-        const vector<Polynomial>& result = Polynomial("16").factorize();
-        ASSERT_EQ(2, result.size());
-        ASSERT_EQ(Polynomial("2"), result[0]);
-        ASSERT_EQ(Polynomial("B"), result[1]);
-    }
-    {
-        const vector<Polynomial>& result = Polynomial("53").factorize();
-        ASSERT_EQ(3, result.size());
-        ASSERT_EQ(Polynomial("3"), result[0]);
-        ASSERT_EQ(Polynomial("7"), result[1]);
-        ASSERT_EQ(Polynomial("B"), result[2]);
-    }
-}
-
-TEST(PolynomialTest, PairFactorize)
-{
-    const vector< pair<Polynomial, Polynomial> >& pair_factors = Polynomial("53").pair_factorize();
-    ASSERT_EQ(3, pair_factors.size());
-    ASSERT_EQ(make_pair(Polynomial("3"), Polynomial("31")), pair_factors[0]);
-    ASSERT_EQ(make_pair(Polynomial("7"), Polynomial("1D")), pair_factors[1]);
-    ASSERT_EQ(make_pair(Polynomial("B"), Polynomial("9")), pair_factors[2]);
-}
-
-TEST(PolynomialTest, PairFactorizeWithMaxDegree)
-{
-    const vector< pair<Polynomial, Polynomial> >& pair_factors = Polynomial("53").pair_factorize(3);
-    ASSERT_EQ(1, pair_factors.size());
-    ASSERT_EQ(make_pair(Polynomial("B"), Polynomial("9")), pair_factors[0]);
-}
-
 TEST(PolynomialTest, BerlekampQMatrix)
 {
     {
