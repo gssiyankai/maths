@@ -33,13 +33,13 @@ Polynomial::Polynomial(vector<int> coeffs) : coeffs_(strip(coeffs))
 {
 }
 
-vector<int> Polynomial::strip(const vector<int>& cs)
+vector<int> Polynomial::strip(const vector<int>& n)
 {
-    for(auto i = cs.begin(); i != cs.end(); ++i)
+    for(auto i = n.begin(); i != n.end(); ++i)
     {
         if(*i!=0)
         {
-            return vector<int>(i, cs.end());
+            return vector<int>(i, n.end());
         }
     }
     return vector<int>(1,0);
@@ -86,38 +86,37 @@ string Polynomial::str() const
     return str;
 }
 
-//Polynomial Polynomial::multiply(const Polynomial& m) const
-//{
-//    return Polynomial(multiply(coeffs_, m.coeffs_));
-//}
-//
-//unsigned int Polynomial::multiply(unsigned int n, unsigned int m)
-//{
-//    unsigned int r = 0;
-//    unsigned int i = 0;
-//    while(m > 0)
-//    {
-//        if((m & 1) == 1)
-//        {
-//            r ^= (n << i);
-//        }
-//        m = m >> 1;
-//        ++i;
-//    }
-//    return r;
-//}
-//
-//unsigned int Polynomial::degree(unsigned int n)
-//{
-//    unsigned int i = 0;
-//    while(n > 1)
-//    {
-//        n = n >> 1;
-//        ++i;
-//    }
-//    return i;
-//}
-//
+unsigned int Polynomial::degree() const
+{
+    return degree(coeffs_);
+}
+
+unsigned int Polynomial::degree(const vector<int>& n)
+{
+    return n.size() - 1;
+}
+
+Polynomial Polynomial::multiply(const Polynomial& m) const
+{
+    return Polynomial(multiply(coeffs_, m.coeffs_));
+}
+
+vector<int> Polynomial::multiply(const vector<int>& n, const vector<int>& m)
+{
+    int dn = degree(n);
+    int dm = degree(m);
+    int dp = dn + dm + 1;
+    vector<int> p(dp, 0);
+    for(int i = 0; i < dp; ++i)
+    {
+        for(int j = max(0, i - dm); j < min(i, dn) + 1; ++j)
+        {
+            p[i] ^= n[j] * m[i - j];
+        }
+    }
+    return strip(p);
+}
+
 //unsigned int Polynomial::quotient(unsigned int dividend, unsigned int divisor)
 //{
 //    unsigned int d = divisor;

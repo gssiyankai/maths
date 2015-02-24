@@ -22,15 +22,23 @@ TEST(PolynomialTest, StringToPolynomial)
               Polynomial("6677e201 46508fb7").coeffs());
 }
 
-//TEST(PolynomialTest, Multiply)
-//{
-//    ASSERT_EQ(Polynomial("0"), Polynomial("1").multiply(Polynomial("0")));
-//    ASSERT_EQ(Polynomial("1"), Polynomial("1").multiply(Polynomial("1")));
-//    ASSERT_EQ(Polynomial("9"), Polynomial("3").multiply(Polynomial("7")));
-//    ASSERT_EQ(Polynomial("53"), Polynomial("B").multiply(Polynomial("9")));
-//    ASSERT_EQ(Polynomial("16"), Polynomial("B").multiply(Polynomial("2")));
-//}
-//
+TEST(PolynomialTest, Degree)
+{
+    ASSERT_EQ(0, Polynomial("0").degree());
+    ASSERT_EQ(0, Polynomial("1").degree());
+    ASSERT_EQ(2, Polynomial("7").degree());
+    ASSERT_EQ(62, Polynomial("6677e201 46508fb7").degree());
+}
+
+TEST(PolynomialTest, Multiply)
+{
+    ASSERT_EQ(Polynomial("0"), Polynomial("1").multiply(Polynomial("0")));
+    ASSERT_EQ(Polynomial("1"), Polynomial("1").multiply(Polynomial("1")));
+    ASSERT_EQ(Polynomial("9"), Polynomial("3").multiply(Polynomial("7")));
+    ASSERT_EQ(Polynomial("53"), Polynomial("B").multiply(Polynomial("9")));
+    ASSERT_EQ(Polynomial("16"), Polynomial("B").multiply(Polynomial("2")));
+}
+
 //TEST(PolynomialTest, Gcd)
 //{
 //    ASSERT_EQ(Polynomial("1"), Polynomial("1").gcd(Polynomial("1")));
