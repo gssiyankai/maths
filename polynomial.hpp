@@ -22,6 +22,7 @@ public:
 //    static unsigned int sub_ground(unsigned int f, unsigned int a);
 
 private:
+    static std::vector<int> strip(const std::vector<int>& cs);
 //    static unsigned int multiply(unsigned int n, unsigned int m);
 //    static unsigned int degree(unsigned int n);
 //    static unsigned int quotient(unsigned int dividend, unsigned int divisor);

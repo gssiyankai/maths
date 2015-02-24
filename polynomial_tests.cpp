@@ -14,10 +14,10 @@ TEST(PolynomialTest, PolynomialToString)
 
 TEST(PolynomialTest, StringToPolynomial)
 {
-    ASSERT_EQ(vector<int>({0,0,0,0}), Polynomial("0").coeffs());
-    ASSERT_EQ(vector<int>({0,0,0,1}), Polynomial("1").coeffs());
+    ASSERT_EQ(vector<int>({0}), Polynomial("0").coeffs());
+    ASSERT_EQ(vector<int>({1}), Polynomial("1").coeffs());
     ASSERT_EQ(vector<int>({1,1,0,1}), Polynomial("D").coeffs());
-    ASSERT_EQ(vector<int>({0,1,1,0,0,1,1,0,0,1,1,1,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,
+    ASSERT_EQ(vector<int>({  1,1,0,0,1,1,0,0,1,1,1,0,1,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,
                            0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,1,0,0,0,1,1,1,1,1,0,1,1,0,1,1,1}),
               Polynomial("6677e201 46508fb7").coeffs());
 }

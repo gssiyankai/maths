@@ -26,10 +26,23 @@ Polynomial::Polynomial(const std::string& value)
             coeffs_.push_back(bit);
         }
     }
+    coeffs_ = strip(coeffs_);
 }
 
-Polynomial::Polynomial(vector<int> coeffs) : coeffs_(coeffs)
+Polynomial::Polynomial(vector<int> coeffs) : coeffs_(strip(coeffs))
 {
+}
+
+vector<int> Polynomial::strip(const vector<int>& cs)
+{
+    for(auto i = cs.begin(); i != cs.end(); ++i)
+    {
+        if(*i!=0)
+        {
+            return vector<int>(i, cs.end());
+        }
+    }
+    return vector<int>(1,0);
 }
 
 bool Polynomial::operator==(const Polynomial &o) const
