@@ -14,7 +14,6 @@ public:
     bool operator ==(const Polynomial& o) const;
     unsigned int coeffs() const;
     std::string str() const;
-    Polynomial derivative() const;
     Polynomial multiply(const Polynomial& m) const;
     std::vector<Polynomial> divide(const Polynomial& divisor) const;
     Polynomial gcd(const Polynomial& p) const;
@@ -26,7 +25,6 @@ public:
     static unsigned int sub_ground(unsigned int f, unsigned int a);
 
 private:
-    static unsigned int derivative(unsigned int n);
     static unsigned int multiply(unsigned int n, unsigned int m);
     static unsigned int degree(unsigned int n);
     static unsigned int quotient(unsigned int dividend, unsigned int divisor);

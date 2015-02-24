@@ -33,16 +33,6 @@ string Polynomial::str() const
     return stream.str();
 }
 
-Polynomial Polynomial::derivative() const
-{
-    return Polynomial(derivative(coeffs_));
-}
-
-unsigned int Polynomial::derivative(unsigned int n)
-{
-    return (n >> 1) & 0x55555555;
-}
-
 Polynomial Polynomial::multiply(const Polynomial& m) const
 {
     return Polynomial(multiply(coeffs_, m.coeffs_));

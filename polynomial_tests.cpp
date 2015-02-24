@@ -17,15 +17,6 @@ TEST(PolynomialTest, StringToPolynomial)
     ASSERT_EQ(13, Polynomial("D").coeffs());
 }
 
-TEST(PolynomialTest, Derivative)
-{
-    ASSERT_EQ(Polynomial("0"), Polynomial("0").derivative());
-    ASSERT_EQ(Polynomial("0"), Polynomial("1").derivative());
-    ASSERT_EQ(Polynomial("1"), Polynomial("2").derivative());
-    ASSERT_EQ(Polynomial("14"), Polynomial("29").derivative());
-    ASSERT_EQ(Polynomial("0"), Polynomial("14").derivative());
-}
-
 TEST(PolynomialTest, Multiply)
 {
     ASSERT_EQ(Polynomial("0"), Polynomial("1").multiply(Polynomial("0")));
@@ -169,10 +160,10 @@ TEST(PolynomialTest, FactorizeBerlekamp)
         ASSERT_EQ(Polynomial("B"), result[0]);
         ASSERT_EQ(Polynomial("2"), result[1]);
     }
-    {
-        const vector<Polynomial>& result = Polynomial("6677e20146508fb7").factorize_berlekamp();
-        ASSERT_EQ(2, result.size());
-        ASSERT_EQ(Polynomial("b0c152f9"), result[0]);
-        ASSERT_EQ(Polynomial("ebf2831f"), result[1]);
-    }
+//    {
+//        const vector<Polynomial>& result = Polynomial("6677e20146508fb7").factorize_berlekamp();
+//        ASSERT_EQ(2, result.size());
+//        ASSERT_EQ(Polynomial("b0c152f9"), result[0]);
+//        ASSERT_EQ(Polynomial("ebf2831f"), result[1]);
+//    }
 }
