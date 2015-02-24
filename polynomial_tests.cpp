@@ -26,35 +26,6 @@ TEST(PolynomialTest, Multiply)
     ASSERT_EQ(Polynomial("16"), Polynomial("B").multiply(Polynomial("2")));
 }
 
-TEST(PolynomialTest, Divide)
-{
-    {
-        const vector<Polynomial>& result = Polynomial("1").divide(Polynomial("1"));
-        ASSERT_EQ(Polynomial("1"), result[0]);
-        ASSERT_EQ(Polynomial("0"), result[1]);
-    }
-    {
-        const vector<Polynomial>& result = Polynomial("95").divide(Polynomial("3"));
-        ASSERT_EQ(Polynomial("73"), result[0]);
-        ASSERT_EQ(Polynomial("0"), result[1]);
-    }
-    {
-        const vector<Polynomial>& result = Polynomial("D").divide(Polynomial("3"));
-        ASSERT_EQ(Polynomial("4"), result[0]);
-        ASSERT_EQ(Polynomial("1"), result[1]);
-    }
-    {
-        const vector<Polynomial>& result = Polynomial("53").divide(Polynomial("B"));
-        ASSERT_EQ(Polynomial("9"), result[0]);
-        ASSERT_EQ(Polynomial("0"), result[1]);
-    }
-    {
-        const vector<Polynomial>& result = Polynomial("16").divide(Polynomial("B"));
-        ASSERT_EQ(Polynomial("2"), result[0]);
-        ASSERT_EQ(Polynomial("0"), result[1]);
-    }
-}
-
 TEST(PolynomialTest, Gcd)
 {
     ASSERT_EQ(Polynomial("1"), Polynomial("1").gcd(Polynomial("1")));

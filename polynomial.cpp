@@ -54,26 +54,6 @@ unsigned int Polynomial::multiply(unsigned int n, unsigned int m)
     return r;
 }
 
-vector<Polynomial> Polynomial::divide(const Polynomial &divisor) const
-{
-    vector<Polynomial> result;
-
-    unsigned int d = divisor.coeffs_;
-    unsigned int q = 0;
-    unsigned int r = coeffs_;
-
-    while(r != 0 && r >= d)
-    {
-        unsigned int t = (((unsigned int)1) << (degree(r) - degree(d)));
-        q ^= t;
-        r ^= multiply(t, d);
-    }
-
-    result.push_back(Polynomial(q));
-    result.push_back(Polynomial(r));
-    return result;
-}
-
 unsigned int Polynomial::degree(unsigned int n)
 {
     unsigned int i = 0;

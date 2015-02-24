@@ -15,7 +15,6 @@ public:
     unsigned int coeffs() const;
     std::string str() const;
     Polynomial multiply(const Polynomial& m) const;
-    std::vector<Polynomial> divide(const Polynomial& divisor) const;
     Polynomial gcd(const Polynomial& p) const;
     std::vector<Polynomial> factorize() const;
     std::vector< std::pair<Polynomial, Polynomial> > pair_factorize(unsigned int d=0xFFFFFFFF) const;
