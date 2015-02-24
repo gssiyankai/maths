@@ -117,55 +117,59 @@ vector<int> Polynomial::multiply(const vector<int>& n, const vector<int>& m)
     return strip(p);
 }
 
-//unsigned int Polynomial::quotient(unsigned int dividend, unsigned int divisor)
-//{
-//    unsigned int d = divisor;
-//    unsigned int q = 0;
-//    unsigned int r = dividend;
-//
-//    while(r != 0 && r >= d)
-//    {
-//        unsigned int t = (((unsigned int)1) << (degree(r) - degree(d)));
-//        q ^= t;
-//        r ^= multiply(t, d);
-//    }
-//
-//    return q;
-//}
-//
-//unsigned int Polynomial::remainder(unsigned int dividend, unsigned int divisor)
-//{
-//    unsigned int d = divisor;
-//    unsigned int r = dividend;
-//
-//    while(r != 0 && r >= d)
-//    {
-//        unsigned int t = (((unsigned int)1) << (degree(r) - degree(d)));
-//        r ^= multiply(t, d);
-//    }
-//
-//    return r;
-//}
-//
-//Polynomial Polynomial::gcd(const Polynomial &p) const
-//{
-//    return Polynomial(gcd(coeffs_, p.coeffs_));
-//}
-//
-//unsigned int Polynomial::gcd(unsigned int a, unsigned int b)
-//{
-//    unsigned int r = 0;
-//
-//    do
-//    {
-//        r = remainder(a, b);
-//        a = b;
-//        b = r;
-//    } while(b != 0);
-//
-//    return a;
-//}
-//
+Polynomial Polynomial::gcd(const Polynomial &p) const
+{
+    return Polynomial(gcd(coeffs_, p.coeffs_));
+}
+
+vector<int> Polynomial::gcd(vector<int> f, vector<int> g)
+{
+    while(g != vector<int>({ 0 }))
+    {
+        vector<int> r = remainder(f, g);
+        f = g;
+        g = r;
+    }
+
+    return f;
+}
+
+vector< vector<int> > Polynomial::divide(const vector<int>& f, const vector<int>& g)
+{
+    int df = degree(f);
+    int dg = degree(g);
+
+    if(df < dg)
+    {
+        return { vector<int>(), f };
+    }
+
+    vector<int> h(f);
+    int dq = df - dg;
+    int dr = dg - 1;
+
+    for(int i = 0; i < df + 1; ++i)
+    {
+        for(int j = max(0, dg - i); j < min(df - i, dr) + 1; ++j)
+        {
+            h[i] ^= h[i + j - dg] * g[dg - j];
+        }
+    }
+
+    return { vector<int>(h.begin(), h.begin()+dq),
+             strip(vector<int>(h.begin()+dq+1, h.end())) };
+}
+
+vector<int> Polynomial::quotient(const vector<int>& f, const vector<int>& g)
+{
+    return divide(f, g)[0];
+}
+
+vector<int> Polynomial::remainder(const vector<int>& f, const vector<int>& g)
+{
+    return divide(f, g)[1];
+}
+
 //vector<Polynomial> Polynomial::factorize_berlekamp() const
 //{
 //    vector< vector<int> > q = berlekamp_qmatrix(coeffs_);

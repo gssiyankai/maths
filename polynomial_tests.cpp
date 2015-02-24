@@ -39,13 +39,13 @@ TEST(PolynomialTest, Multiply)
     ASSERT_EQ(Polynomial("16"), Polynomial("B").multiply(Polynomial("2")));
 }
 
-//TEST(PolynomialTest, Gcd)
-//{
-//    ASSERT_EQ(Polynomial("1"), Polynomial("1").gcd(Polynomial("1")));
-//    ASSERT_EQ(Polynomial("73"), Polynomial("95").gcd(Polynomial("73")));
-//    ASSERT_EQ(Polynomial("B"), Polynomial("53").gcd(Polynomial("16")));
-//}
-//
+TEST(PolynomialTest, Gcd)
+{
+    ASSERT_EQ(Polynomial("1"), Polynomial("1").gcd(Polynomial("1")));
+    ASSERT_EQ(Polynomial("73"), Polynomial("95").gcd(Polynomial("73")));
+    ASSERT_EQ(Polynomial("B"), Polynomial("53").gcd(Polynomial("16")));
+}
+
 //TEST(PolynomialTest, BerlekampQMatrix)
 //{
 //    {
