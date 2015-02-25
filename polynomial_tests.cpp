@@ -46,39 +46,6 @@ TEST(PolynomialTest, Gcd)
     ASSERT_EQ(Polynomial("B"), Polynomial("53").gcd(Polynomial("16")));
 }
 
-TEST(PolynomialTest, BerlekampQMatrix)
-{
-    {
-        const vector< vector<int> >& result = Polynomial::berlekamp_qmatrix(Polynomial("73AF").coeffs());
-        const vector< vector<int> > expected = { { 1,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-                                                 { 0,0,1,0,0,0,0,0,0,0,0,0,0,0 },
-                                                 { 0,0,0,0,1,0,0,0,0,0,0,0,0,0 },
-                                                 { 0,0,0,0,0,0,1,0,0,0,0,0,0,0 },
-                                                 { 0,0,0,0,0,0,0,0,1,0,0,0,0,0 },
-                                                 { 0,0,0,0,0,0,0,0,0,0,1,0,0,0 },
-                                                 { 0,0,0,0,0,0,0,0,0,0,0,0,1,0 },
-                                                 { 1,1,1,1,0,1,0,1,1,1,0,0,1,1 },
-                                                 { 0,1,0,0,0,1,1,1,1,0,0,1,0,1 },
-                                                 { 1,0,0,1,1,1,1,0,1,1,0,0,1,1 },
-                                                 { 0,1,0,1,1,1,0,1,0,1,0,1,0,1 },
-                                                 { 1,0,0,1,1,0,0,0,0,1,1,1,1,1 },
-                                                 { 0,1,0,1,1,1,0,0,1,1,1,1,1,0 },
-                                                 { 1,1,1,0,0,0,1,0,1,1,1,1,0,0 } };
-        ASSERT_EQ(expected, result);
-    }
-}
-
-TEST(PolynomialTest, BerlekampQBasis)
-{
-    const vector< vector<int> >& result = Polynomial::berlekamp_qbasis(
-                                                Polynomial::berlekamp_qmatrix(Polynomial("73AF").coeffs()));
-    const vector< vector<int> > expected = { { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                                             { 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0 },
-                                             { 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0 },
-                                             { 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1 } };
-    ASSERT_EQ(expected, result);
-}
-
 TEST(PolynomialTest, Factorize)
 {
     {
@@ -107,7 +74,7 @@ TEST(PolynomialTest, Factorize)
         ASSERT_EQ(Polynomial("2"), result[1]);
     }
     {
-        const vector<Polynomial>& result = Polynomial("6677e20146508fb7").factorize();
+        const vector<Polynomial>& result = Polynomial("6677e2014 6508fb7").factorize();
         ASSERT_EQ(2, result.size());
         ASSERT_EQ(Polynomial("b0c152f9"), result[0]);
         ASSERT_EQ(Polynomial("ebf2831f"), result[1]);

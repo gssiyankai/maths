@@ -19,17 +19,15 @@ public:
     Polynomial gcd(const Polynomial& p) const;
     std::vector<Polynomial> factorize() const;
 
-    static std::vector< std::vector<int> > berlekamp_qmatrix(const std::vector<int>& f);
-    static std::vector< std::vector<int> > berlekamp_qbasis(const std::vector< std::vector<int> >& qmatrix);
-
 private:
+    static std::vector<int> strip(const std::vector<int>& n);
     static unsigned int degree(const std::vector<int>& n);
     static std::vector<int> multiply(const std::vector<int>& n, const std::vector<int>& m);
     static std::vector<int> gcd(std::vector<int> f, std::vector<int> g);
     static std::vector<int> quotient(const std::vector<int>& f, const std::vector<int>& g);
     static std::vector<int> remainder(const std::vector<int>& f, const std::vector<int>& g);
-    static std::vector<int> strip(const std::vector<int>& n);
-
+    static std::vector< std::vector<int> > berlekamp_qmatrix(const std::vector<int>& f);
+    static std::vector< std::vector<int> > berlekamp_qbasis(const std::vector< std::vector<int> >& qmatrix);
     static std::vector<int> sub_ground(const std::vector<int>& f, int a);
     static std::vector<Polynomial> polynomials(const std::vector< std::vector<int> >& fs);
 
