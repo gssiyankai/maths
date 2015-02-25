@@ -1,5 +1,4 @@
 #include "polynomial.hpp"
-#include "utils.hpp"
 #include <sstream>
 #include <algorithm>
 #include <stack>
